@@ -1,14 +1,21 @@
-import { useState, useEffect, createContext } from 'react'
+import { useState, useEffect, createContext } from 'react';
 
-const KioskContext = createContext()
+const KioskContext = createContext();
 
 const KioskProvider = ({ children }) => {
-  return (
-    <KioskContext.Provider value={{}}>
-      { children }
-    </KioskContext.Provider>
-  )
-}
+  const [categories, setCategories] = useState([]);
 
-export { KioskProvider }
-export default KioskContext
+  const getCategories = async () => {
+    const { data } = await axios('api/categories');
+    setCategories(data);
+  };
+
+  useEffect(() => {
+    getCategories();
+  }, []);
+
+  return <KioskContext.Provider value={{categories}}>{children}</KioskContext.Provider>;
+};
+
+export { KioskProvider };
+export default KioskContext;
