@@ -45,7 +45,7 @@ const ModalProduct = () => {
           <button
             type="button"
             onClick={() => {
-              if(quantity <= 1) return
+              if (quantity <= 1) return;
               setQuantity(quantity - 1);
             }}
           >
@@ -68,7 +68,7 @@ const ModalProduct = () => {
           <button
             type="button"
             onClick={() => {
-              if(quantity >= 10) return
+              if (quantity >= 10) return;
               setQuantity(quantity + 1);
             }}
           >
@@ -89,10 +89,13 @@ const ModalProduct = () => {
           </button>
         </div>
 
-        <button type='button' className='bg-indigo-600 hover:bg-indigo-800 px-5 py-2 mt-5 text-white font-bold uppercase rounded'>
+        <button
+          type="button"
+          className="bg-indigo-600 hover:bg-indigo-800 px-5 py-2 mt-5 text-white font-bold uppercase rounded"
+          onClick={() => hadleAddOrder({...product, quantity})}
+        >
           Añadir a pedido
         </button>
-
       </div>
     </div>
   );
