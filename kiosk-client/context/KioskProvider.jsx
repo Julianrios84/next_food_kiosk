@@ -37,6 +37,8 @@ const KioskProvider = ({ children }) => {
     } else {
       setOrder([...order, product]);
     }
+
+    setModal(false)
   };
 
   useEffect(() => {
@@ -57,7 +59,8 @@ const KioskProvider = ({ children }) => {
         handleSetProduct,
         modal,
         handleChangeModal,
-        hadleAddOrder
+        hadleAddOrder,
+        order
       }}
     >
       {children}

@@ -2,8 +2,7 @@ import Head from 'next/head';
 import Modal from 'react-modal';
 import useKiosk from '../hooks/useKiosk';
 import Sidebar from '../components/Sidebar';
-import ModalProduct from '../components/modals/Product';
-
+import ModalProduct from '../components/ModalProduct';
 
 const customStyles = {
   content: {
