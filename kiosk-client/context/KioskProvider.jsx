@@ -20,6 +20,10 @@ const KioskProvider = ({ children }) => {
     getCategories();
   }, []);
 
+  useEffect(() => {
+    setCategoryCurrent(categories[0])
+  }, [categories])
+
   return <KioskContext.Provider value={{categories, categoryCurrent, handleClickCategory}}>{children}</KioskContext.Provider>;
 };
 
