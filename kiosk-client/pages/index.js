@@ -1,32 +1,13 @@
-import { useEffect } from 'react'
-import { PrismaClient } from '@prisma/client'
+import Layout from '../layout/Layout';
 
-export default function Home({categories}) {
+export default function Home() {
 
-  useEffect(() => {
-    const consultDb =  async () => {
-      const prisma = new PrismaClient();
-      const categories = await prisma.category.findMany() 
-      console.log("🚀 ~ file: index.js:10 ~ consult ~ categories", categories)
-    }
-    consultDb()
-  }, [])
-  
-
+ 
   return (
-    <div>
-      <h1 className=''>Next</h1>
-    </div>
+    <Layout>
+      <h1>Next</h1>
+    </Layout>
   )
 }
 
 
-export const getServerSideProps = async () => {
-  const prisma = new PrismaClient();
-  const categories = await prisma.category.findMany()
-  return {
-    props: {
-      categories
-    }
-  }
-}
