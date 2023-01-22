@@ -1,8 +1,11 @@
 import Head from 'next/head';
 import Modal from 'react-modal';
+import { ToastContainer } from 'react-toastify';
 import useKiosk from '../hooks/useKiosk';
 import Sidebar from '../components/Sidebar';
 import ModalProduct from '../components/ModalProduct';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 const customStyles = {
   content: {
@@ -18,8 +21,7 @@ const customStyles = {
 Modal.setAppElement('#__next');
 
 export default function Layout({ children, page }) {
-
-  const { modal } = useKiosk()
+  const { modal } = useKiosk();
 
   return (
     <>
@@ -42,6 +44,8 @@ export default function Layout({ children, page }) {
           <ModalProduct />
         </Modal>
       )}
+
+      <ToastContainer />
     </>
   );
 }
