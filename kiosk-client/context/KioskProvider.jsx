@@ -31,7 +31,7 @@ const KioskProvider = ({ children }) => {
 
 
 
-  const hadleAddOrder = ({ categoryId, picture, ...product }) => {
+  const hadleAddOrder = ({ categoryId, ...product }) => {
     if (order.some((item) => item.id === product.id)) {
       const updatedOrder = order.map((item) =>
         item.id === product.id ? product : item

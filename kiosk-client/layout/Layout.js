@@ -4,7 +4,7 @@ import { ToastContainer } from 'react-toastify';
 
 import useKiosk from '../hooks/useKiosk';
 import Sidebar from '../components/Sidebar';
-import ModalProduct from '../components/ModalProduct';
+import ModalProduct from '../components/ProductModel';
 import Steps from '../components/Steps';
 
 import 'react-toastify/dist/ReactToastify.css';
