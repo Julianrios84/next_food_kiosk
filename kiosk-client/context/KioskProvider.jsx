@@ -15,6 +15,8 @@ const KioskProvider = ({ children }) => {
   const [modal, setModal] = useState(false);
   const [order, setOrder] = useState([]);
   const [name, setName] = useState('');
+  const [total, setTotal] = useState(0);
+
 
   const getCategories = async () => {
     const { data } = await axios('api/categories');
@@ -59,8 +61,11 @@ const KioskProvider = ({ children }) => {
       setOrder([...order, product]);
       toast.success('Producto agregado al pedido');
     }
-
     setModal(false);
+  };
+
+  const acceptOrder = async (e) => {
+    e.preventDefault();
   };
 
   useEffect(() => {
@@ -70,6 +75,12 @@ const KioskProvider = ({ children }) => {
   useEffect(() => {
     setCategoryCurrent(categories[0]);
   }, [categories]);
+
+
+  useEffect(() => {
+    const totalOrder = order.reduce((total, product) => (product.price * product.quantity) + total, 0)
+    setTotal(totalOrder)
+  }, [order]);
 
   return (
     <KioskContext.Provider
@@ -86,7 +97,9 @@ const KioskProvider = ({ children }) => {
         handleUpdatedQuantity,
         handleRemoveProduct,
         name,
-        setName
+        setName,
+        acceptOrder,
+        total
       }}
     >
       {children}
