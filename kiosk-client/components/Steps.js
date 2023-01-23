@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router'
-import useKiosk from '../hooks/useKiosk'
 
 const steps = [
   { step: 1, name: 'Menú', url: '/' },
@@ -10,13 +9,12 @@ const steps = [
 const Steps = () => {
 
   const router = useRouter()
-  const { handleChangeStep, step } = useKiosk()
 
   const calculatePercentage = () => {
     let value;
-    if(step === 1) {
+    if(router.pathname === "/") {
       value = 5;
-    }else if(step === 2) {
+    }else if(router.pathname === "/resume") {
       value = 50;
     }else {
       value = 100;
@@ -29,7 +27,6 @@ const Steps = () => {
       <div className="flex justify-between mb-5">
         {steps.map((step) => (
           <button type='submit' onClick={() => {
-            handleChangeStep(step.step)
             router.push(step.url)
           }}  className="text-2xl font-black" key={step.step}>{step.name}</button>
         ))}

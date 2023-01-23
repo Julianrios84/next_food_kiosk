@@ -10,7 +10,6 @@ const KioskProvider = ({ children }) => {
   const [product, setProduct] = useState({});
   const [modal, setModal] = useState(false);
   const [order, setOrder] = useState([]);
-  const [step, setStep] = useState(1);
 
   const getCategories = async () => {
     const { data } = await axios('api/categories');
@@ -30,9 +29,7 @@ const KioskProvider = ({ children }) => {
     setModal(!modal);
   };
 
-  const handleChangeStep = (step) => {
-    setStep(step);
-  };
+
 
   const hadleAddOrder = ({ categoryId, picture, ...product }) => {
     if (order.some((item) => item.id === product.id)) {
@@ -69,8 +66,6 @@ const KioskProvider = ({ children }) => {
         handleChangeModal,
         hadleAddOrder,
         order,
-        step,
-        handleChangeStep
       }}
     >
       {children}
