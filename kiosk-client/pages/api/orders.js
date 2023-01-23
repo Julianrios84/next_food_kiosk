@@ -5,7 +5,7 @@ export default async function handler(req, res) {
 
   const orders = await prisma.order.findMany({
     where: {
-      status: true
+      status: false
     }
   })
 
