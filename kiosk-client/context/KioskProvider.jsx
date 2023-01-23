@@ -29,6 +29,12 @@ const KioskProvider = ({ children }) => {
     setModal(!modal);
   };
 
+  const handleUpdatedQuantity = (id) => {
+    const updatedProduct = order.find(item => item.id === id);
+    setProduct(updatedProduct)
+    setModal(!modal);
+  }
+
 
 
   const hadleAddOrder = ({ categoryId, ...product }) => {
@@ -66,6 +72,7 @@ const KioskProvider = ({ children }) => {
         handleChangeModal,
         hadleAddOrder,
         order,
+        handleUpdatedQuantity
       }}
     >
       {children}
