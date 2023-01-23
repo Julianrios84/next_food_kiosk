@@ -1,13 +1,12 @@
 import { useState, useEffect, createContext } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 
 const KioskContext = createContext();
 
 const KioskProvider = ({ children }) => {
-
-  const router = useRouter()
+  const router = useRouter();
 
   const [categories, setCategories] = useState([]);
   const [categoryCurrent, setCategoryCurrent] = useState({});
@@ -17,7 +16,6 @@ const KioskProvider = ({ children }) => {
   const [name, setName] = useState('');
   const [total, setTotal] = useState(0);
 
-
   const getCategories = async () => {
     const { data } = await axios('api/categories');
     setCategories(data);
@@ -26,7 +24,7 @@ const KioskProvider = ({ children }) => {
   const handleClickCategory = (id) => {
     const category = categories.find((item) => item.id === id);
     setCategoryCurrent(category);
-    router.push('/')
+    router.push('/');
   };
 
   const handleSetProduct = (product) => {
@@ -38,17 +36,15 @@ const KioskProvider = ({ children }) => {
   };
 
   const handleUpdatedQuantity = (id) => {
-    const updatedProduct = order.find(item => item.id === id);
-    setProduct(updatedProduct)
+    const updatedProduct = order.find((item) => item.id === id);
+    setProduct(updatedProduct);
     setModal(!modal);
-  }
+  };
 
   const handleRemoveProduct = (id) => {
-    const updatedOrder = order.filter(item => item.id !== id);
-    setOrder(updatedOrder)
-  }
-
-
+    const updatedOrder = order.filter((item) => item.id !== id);
+    setOrder(updatedOrder);
+  };
 
   const hadleAddOrder = ({ categoryId, ...product }) => {
     if (order.some((item) => item.id === product.id)) {
@@ -66,6 +62,21 @@ const KioskProvider = ({ children }) => {
 
   const acceptOrder = async (e) => {
     e.preventDefault();
+
+    try {
+      const { data } = await axios.post('/api/orders', {
+        order,
+        name,
+        total,
+        date: Date.now().toString()
+      });
+      console.log("🚀 ~ file: KioskProvider.jsx:73 ~ acceptOrder ~ data", data)
+    } catch (error) {
+      console.log(
+        '🚀 ~ file: KioskProvider.jsx:73 ~ acceptOrder ~ error',
+        error
+      );
+    }
   };
 
   useEffect(() => {
@@ -76,10 +87,12 @@ const KioskProvider = ({ children }) => {
     setCategoryCurrent(categories[0]);
   }, [categories]);
 
-
   useEffect(() => {
-    const totalOrder = order.reduce((total, product) => (product.price * product.quantity) + total, 0)
-    setTotal(totalOrder)
+    const totalOrder = order.reduce(
+      (total, product) => product.price * product.quantity + total,
+      0
+    );
+    setTotal(totalOrder);
   }, [order]);
 
   return (
