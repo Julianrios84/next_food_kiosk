@@ -1,6 +1,6 @@
 import { useState, useEffect, createContext } from 'react';
 import axios from 'axios';
-import { toast } from 'react-toastify'
+import { toast } from 'react-toastify';
 
 const KioskContext = createContext();
 
@@ -10,6 +10,7 @@ const KioskProvider = ({ children }) => {
   const [product, setProduct] = useState({});
   const [modal, setModal] = useState(false);
   const [order, setOrder] = useState([]);
+  const [step, setStep] = useState(1);
 
   const getCategories = async () => {
     const { data } = await axios('api/categories');
@@ -29,19 +30,23 @@ const KioskProvider = ({ children }) => {
     setModal(!modal);
   };
 
+  const handleChangeStep = (step) => {
+    setStep(step);
+  };
+
   const hadleAddOrder = ({ categoryId, picture, ...product }) => {
     if (order.some((item) => item.id === product.id)) {
       const updatedOrder = order.map((item) =>
         item.id === product.id ? product : item
       );
       setOrder(updatedOrder);
-      toast.success('Pedido actualizado')
+      toast.success('Pedido actualizado');
     } else {
       setOrder([...order, product]);
-      toast.success('Producto agregado al pedido')
+      toast.success('Producto agregado al pedido');
     }
 
-    setModal(false)
+    setModal(false);
   };
 
   useEffect(() => {
@@ -63,7 +68,9 @@ const KioskProvider = ({ children }) => {
         modal,
         handleChangeModal,
         hadleAddOrder,
-        order
+        order,
+        step,
+        handleChangeStep
       }}
     >
       {children}
