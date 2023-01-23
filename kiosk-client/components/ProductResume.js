@@ -4,7 +4,7 @@ import useKiosk from '../hooks/useKiosk';
 
 const ProductResume = ({ product }) => {
 
-  const { handleUpdatedQuantity } = useKiosk();
+  const { handleUpdatedQuantity, handleRemoveProduct } = useKiosk();
 
   return (
     <div className="shadow p-5 mb-3 flex gap-10 items-center">
@@ -52,6 +52,7 @@ const ProductResume = ({ product }) => {
         <button
           type="button"
           className="bg-red-700 flex gap-2 px-5 py-2 text-white rounded-md font-bold uppercase shadow-md w-full mt-3"
+          onClick={() => handleRemoveProduct(product.id)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
