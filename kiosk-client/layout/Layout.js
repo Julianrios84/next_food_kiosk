@@ -1,9 +1,11 @@
 import Head from 'next/head';
 import Modal from 'react-modal';
 import { ToastContainer } from 'react-toastify';
+
 import useKiosk from '../hooks/useKiosk';
 import Sidebar from '../components/Sidebar';
 import ModalProduct from '../components/ModalProduct';
+import Steps from '../components/Steps';
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -35,7 +37,10 @@ export default function Layout({ children, page }) {
           <Sidebar />
         </aside>
         <main className="md:w-8/12 xl:w-3/4 2xl:w-4/5 h-screen overflow-y-scroll">
-          <div className="p-10">{children}</div>
+          <div className="p-10">
+            <Steps />
+            {children}
+          </div>
         </main>
       </div>
 
